@@ -22,20 +22,58 @@ const tasks = [
   },
 ];
 
-//Add Habits
-var currentH3 = document.getElementById("habits");
+//Select elements
+const habitsUl = document.getElementById("habits");
+const tasksUl = document.getElementById("tasks");
+const input = document.querySelector("input");
+const addButton = document.querySelector("button");
+const empty = document.getElementById("empty")
 
-for (let step = 0; step < habits.length; step++) {
-  var newH3 = document.createElement("h3");
-  newH3.textContent = habits[step];
-  currentH3.appendChild(newH3);
-}
+//Add Habits
+habits.map(n => {
+  var newLiHabits = document.createElement("li");
+  var newPHabits = document.createElement("p");
+  newPHabits.textContent = n;
+  newLiHabits.append(newPHabits);
+  habitsUl.append(newLiHabits);
+})
+
 
 //Add Tasks
-var currentH3 = document.getElementById("tasks");
+tasks.map(n => {
+  var newLiTasks = document.createElement("li");
+  var newPTasks = document.createElement('p');
+  newPTasks.textContent = n.name;
+  newLiTasks.append(newPTasks);
+  newLiTasks.append(deleteButton()); 
+  tasksUl.append(newLiTasks);
+})
+  
 
-for (let step = 0; step < tasks.length; step++) {
-  var newH3 = document.createElement("h3");
-  newH3.textContent = tasks[step].name;
-  currentH3.appendChild(newH3);
+//Add New Task
+addButton.addEventListener('click',(e) =>{
+  e.preventDefault();
+  if(input.value !== ''){
+  const li = document.createElement('li');
+  const p = document.createElement('p');
+  p.textContent = input.value;
+  li.append(p);
+  li.append(deleteButton()); 
+  tasksUl.append(li);
+  input.value="";
+  }
+})
+
+//Delete Task
+function deleteButton(){
+  const deleteButton = document.createElement("button");
+
+  deleteButton.textContent= "x";
+  
+  deleteButton.addEventListener("click", (e) =>{
+    const item = e.target.parentElement;
+    item.remove();
+  })
+  return deleteButton;
 }
+

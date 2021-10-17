@@ -13,21 +13,51 @@ var tasks = [{
 }, {
   category: "personal",
   name: "pedir cita para X y revisar X"
-}]; //Add Habits
+}]; //Select elements
 
-var currentH3 = document.getElementById("habits");
+var habitsUl = document.getElementById("habits");
+var tasksUl = document.getElementById("tasks");
+var input = document.querySelector("input");
+var addButton = document.querySelector("button");
+var empty = document.getElementById("empty"); //Add Habits
 
-for (var step = 0; step < habits.length; step++) {
-  var newH3 = document.createElement("h3");
-  newH3.textContent = habits[step];
-  currentH3.appendChild(newH3);
-} //Add Tasks
+habits.map(function (n) {
+  var newLiHabits = document.createElement("li");
+  var newPHabits = document.createElement("p");
+  newPHabits.textContent = n;
+  newLiHabits.append(newPHabits);
+  habitsUl.append(newLiHabits);
+}); //Add Tasks
 
+tasks.map(function (n) {
+  var newLiTasks = document.createElement("li");
+  var newPTasks = document.createElement('p');
+  newPTasks.textContent = n.name;
+  newLiTasks.append(newPTasks);
+  newLiTasks.append(deleteButton());
+  tasksUl.append(newLiTasks);
+}); //Add New Task
 
-var currentH3 = document.getElementById("tasks");
+addButton.addEventListener('click', function (e) {
+  e.preventDefault();
 
-for (var _step = 0; _step < tasks.length; _step++) {
-  var newH3 = document.createElement("h3");
-  newH3.textContent = tasks[_step].name;
-  currentH3.appendChild(newH3);
+  if (input.value !== '') {
+    var li = document.createElement('li');
+    var p = document.createElement('p');
+    p.textContent = input.value;
+    li.append(p);
+    li.append(deleteButton());
+    tasksUl.append(li);
+    input.value = "";
+  }
+}); //Delete Task
+
+function deleteButton() {
+  var deleteButton = document.createElement("button");
+  deleteButton.textContent = "x";
+  deleteButton.addEventListener("click", function (e) {
+    var item = e.target.parentElement;
+    item.remove();
+  });
+  return deleteButton;
 }
