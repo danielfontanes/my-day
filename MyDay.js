@@ -22,22 +22,11 @@ const tasks = [
   },
 ];
 
-//Select elements
-const habitsUl = document.getElementById("habits");
+
+//----------------TASKS-----------------------------------------------
 const tasksUl = document.getElementById("tasks");
-const input = document.querySelector("input");
-const addButton = document.querySelector("button");
-const empty = document.getElementById("empty")
-
-//Add Habits
-habits.map(n => {
-  var newLiHabits = document.createElement("li");
-  var newPHabits = document.createElement("p");
-  newPHabits.textContent = n;
-  newLiHabits.append(newPHabits);
-  habitsUl.append(newLiHabits);
-})
-
+const inputTasks = document.getElementById("inputTasks");
+const addButton = document.getElementById("tasksButton");
 
 //Add Tasks
 tasks.map(n => {
@@ -49,18 +38,43 @@ tasks.map(n => {
   tasksUl.append(newLiTasks);
 })
   
+//-----------HABITS--------------------------------------------------
+const habitsUl = document.getElementById("habits");
+const inputHabits = document.getElementById("inputHabits");
+const addButtonHabits = document.getElementById("habitsButton");
 
+//Add Habits
+habits.map(n => {
+  var newLiHabits = document.createElement("li");
+  var newPHabits = document.createElement("p");
+  newPHabits.textContent = n;
+  newLiHabits.append(newPHabits);
+  habitsUl.append(newLiHabits);
+})
+
+//Add New Habit
+addButtonHabits.addEventListener('click',(e) =>{
+  e.preventDefault();
+  if(inputHabits.value !== ''){
+  const li = document.createElement('li');
+  const p = document.createElement('p');
+  p.textContent = inputHabits.value;
+  li.append(p);
+  habitsUl.append(li);
+  inputHabits.value="";
+  }
+})
 //Add New Task
 addButton.addEventListener('click',(e) =>{
   e.preventDefault();
-  if(input.value !== ''){
+  if(inputTasks.value !== ''){
   const li = document.createElement('li');
   const p = document.createElement('p');
-  p.textContent = input.value;
+  p.textContent = inputTasks.value;
   li.append(p);
-  li.append(deleteButton()); 
+  li.append(deleteButton());
   tasksUl.append(li);
-  input.value="";
+  inputTasks.value="";
   }
 })
 
@@ -68,12 +82,10 @@ addButton.addEventListener('click',(e) =>{
 function deleteButton(){
   const deleteButton = document.createElement("button");
 
-  deleteButton.textContent= "x";
-  
+  deleteButton.textContent= "V";
   deleteButton.addEventListener("click", (e) =>{
     const item = e.target.parentElement;
     item.remove();
   })
   return deleteButton;
 }
-

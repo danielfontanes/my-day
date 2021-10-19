@@ -1,0 +1,28 @@
+ul{
+    padding: 20px;
+}
+
+ul#habits{
+    background-color: #f9eed4;
+}
+ul#tasks{
+    background-color: #f9eed4;
+}
+li{
+    display: flex;
+    background-color: #75b510;
+    margin: 10px 0px;
+    padding: 0px 10px;
+    border-radius: 5px;
+}
+p{
+    width: 50%;
+    color: black;
+}
+button{
+    width: 44px;
+}
+button{
+    background-color: green;
+    color: white;
+}
